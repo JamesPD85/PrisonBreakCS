@@ -10,8 +10,8 @@ namespace PrisonStory
     public class TextController
     {
         //Sets player input variables
-        char userOK;
-        char choice;
+        //char ready;
+        //char choice;
 
         public static void Main(string[] args)
         {
@@ -19,9 +19,9 @@ namespace PrisonStory
             System.Console.WriteLine("The Prison Game\n");
             System.Console.WriteLine("The object of this game is to escape the prison without being caught.\n\n");
             System.Console.WriteLine("Ready to begin? (y/n)");
-            char userOK = Console.ReadKey().KeyChar;
-            if (userOK.Equals('y')) statesCell();
-            else if (userOK.Equals('n')) System.Environment.Exit(1);
+            char ready = Console.ReadKey().KeyChar;
+            if (ready.Equals('y')) cellMain();
+            else if (ready.Equals('n')) System.Environment.Exit(1);
         }
 
         public static void PrisonTitle()
@@ -37,7 +37,7 @@ namespace PrisonStory
             System.Console.WriteLine("\n\n\n");
         }
 
-        public static void statesCell()
+        public static void cellMain()
         {
             PrisonTitle();
             System.Console.WriteLine("You are in a prison cell. You've been here for 20 years " +
@@ -48,12 +48,12 @@ namespace PrisonStory
                                      "Press L to inspect the Lock\n" +
                                      "Press M to inspect the Mirror\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('s')) statesSheets();
-            else if (choice.Equals('m')) statesMirror();
-            else if (choice.Equals('l')) statesCellLock();
+            if (choice.Equals('s')) sheets();
+            else if (choice.Equals('m')) mirrorInspect();
+            else if (choice.Equals('l')) cellLock();
         }
 
-        public static void statesCellMirror()
+        public static void cellWithMirror()
         {
             PrisonTitle();
             System.Console.WriteLine("You are in your cell with the mirror. You wonder how you could use this to\n" +
@@ -61,11 +61,11 @@ namespace PrisonStory
                                      "Press S to inspect the Sheets\n" +
                                      "Press L to inspect the Lock\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('s')) statesSheetsMirror();
-            else if (choice.Equals('l')) statesCellLockMirror();
+            if (choice.Equals('s')) sheetsWithMirror();
+            else if (choice.Equals('l')) cellLockMirror();
         }
 
-        public static void statesSheets()
+        public static void sheets()
         {
             PrisonTitle();
             System.Console.WriteLine("There are filthy, disgusting sheets on the bed. " +
@@ -73,20 +73,20 @@ namespace PrisonStory
                                      "sleep in these. That's prison life...\n\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCell();
+            if (choice.Equals('r')) cellMain();
         }
 
-        public static void statesSheetsMirror()
+        public static void sheetsWithMirror()
         {
             PrisonTitle();
             System.Console.WriteLine("You look at the same disgusting sheets again. " +
                                      "Hopefully you won't have to look\nat them much longer.\n\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCellMirror();
+            if (choice.Equals('r')) cellWithMirror();
         }
 
-        public static void statesMirror()
+        public static void mirrorInspect()
         {
             PrisonTitle();
             System.Console.WriteLine("As you look into the mirror yet again after 20 years, you suddenly notice that\n" +
@@ -95,11 +95,11 @@ namespace PrisonStory
                                      "Press L to Look closer\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('l')) statesMirrorLook();
-            if (choice.Equals('r')) statesCell();
+            if (choice.Equals('l')) mirrorLook();
+            if (choice.Equals('r')) cellMain();
         }
 
-        public static void statesMirrorLook()
+        public static void mirrorLook()
         {
             PrisonTitle();
             System.Console.WriteLine("When you look at it from another angle, you can see that the mirror is loose.\n" +
@@ -107,11 +107,11 @@ namespace PrisonStory
                                      "Press T to take the mirror\n" +
                                      "Press R to Return to your cell\n\n");
             char playerChoice = Console.ReadKey().KeyChar;
-            if (playerChoice.Equals('t')) statesCellMirror();
-            if (playerChoice.Equals('r')) statesCell();
+            if (playerChoice.Equals('t')) cellWithMirror();
+            if (playerChoice.Equals('r')) cellMain();
         }
 
-        public static void statesCellLock()
+        public static void cellLock()
         {
             PrisonTitle();
             System.Console.WriteLine("It's one of those keypad locks. You have no idea what the combination is.\n" +
@@ -120,10 +120,10 @@ namespace PrisonStory
                                      "slob guard's dirty hands.\n\n" +
                                      "Press R to Return to your cell\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCell();
+            if (choice.Equals('r')) cellMain();
         }
 
-        public static void statesCellLockMirror()
+        public static void cellLockMirror()
         {
             PrisonTitle();
             System.Console.WriteLine("It's one of those keypad locks. You have no idea what the combination is.\n" +
@@ -132,11 +132,11 @@ namespace PrisonStory
                                      "Press M to use Mirror\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCellMirror();
-            if (choice.Equals('m')) statesKeypad();
+            if (choice.Equals('r')) cellWithMirror();
+            if (choice.Equals('m')) keypad();
         }
 
-        public static void statesKeypad()
+        public static void keypad()
         {
             PrisonTitle();
             System.Console.WriteLine("You reach your hand through the bars, and point the mirror back at the keypad.\n" +
@@ -144,11 +144,11 @@ namespace PrisonStory
                                      "Press K to use the Keypad\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCellMirror();
-            if (choice.Equals('k')) statesLockOpen0();
+            if (choice.Equals('r')) cellWithMirror();
+            if (choice.Equals('k')) cellEscape();
         }
 
-        public static void statesLockOpen0()
+        public static void cellEscape()
         {
             PrisonTitle();
             System.Console.WriteLine("You escaped your cell! Now is your best chance to escape! There are some boxes\n" +
@@ -157,9 +157,8 @@ namespace PrisonStory
                                      "Press C to check the Closet\n" +
                                      "Press S to check the Stairs\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesCloset();
-            if (choice.Equals('s')) statesStairs0();
-            //if (playerChoice.Equals('r')) statesCellOpen();
+            if (choice.Equals('c')) closetKnob();
+            if (choice.Equals('s')) stairsNoGuard();
         }
 
         public static void statesLockOpen1()
@@ -171,12 +170,12 @@ namespace PrisonStory
                                      "Press H to check the Hall\n" +
                                      "Press S to check the Stairs\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesClosetLocked1();
-            if (choice.Equals('h')) statesHall1();
-            if (choice.Equals('s')) statesStairs0();
+            if (choice.Equals('c')) closetLockedNoHairpin();
+            if (choice.Equals('h')) hallFindPin();
+            if (choice.Equals('s')) stairsNoGuard();
         }
 
-        public static void statesCloset()
+        public static void closetKnob()
         {
             PrisonTitle();
             System.Console.WriteLine("Just as you reach for the doorknob, you hear a guard coming down the hall. Your\n" +
@@ -185,12 +184,12 @@ namespace PrisonStory
                                      "Press B to hide behind the Boxes\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesClosetLocked0();
-            if (choice.Equals('b')) statesBoxes();
-            if (choice.Equals('r')) statesCellOpen();
+            if (choice.Equals('c')) closetLockedGuard();
+            if (choice.Equals('b')) boxes();
+            if (choice.Equals('r')) cellHide();
         }
 
-        public static void statesBoxes()
+        public static void boxes()
         {
             PrisonTitle();
             System.Console.WriteLine("You hide behind the boxes as the guard closes in. He notices the cell door open\n" +
@@ -200,10 +199,10 @@ namespace PrisonStory
                                      "guard says \"There's no way you can escape now. You will die in this cell!\"\n\n" +
                                      "Press R to Restart the game\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCell();
+            if (choice.Equals('r')) cellMain();
         }
 
-        public static void statesCellOpen()
+        public static void cellHide()
         {
             PrisonTitle();
             System.Console.WriteLine("You are back in your cell. This should avoid suspicion from the gaurd.\n" +
@@ -212,11 +211,11 @@ namespace PrisonStory
                                      "Press S to inspect the Sheets\n" +
                                      "Press H to go to the Hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('s')) statesSheetsGross();
-            else if (choice.Equals('h')) statesHall0();
+            if (choice.Equals('s')) sheetsGross();
+            else if (choice.Equals('h')) hallNoGuard();
         }
 
-        public static void statesClosetLocked0()
+        public static void closetLockedGuard()
         {
             PrisonTitle();
             System.Console.WriteLine("The closet door is locked. You might be able to pick the lock with something.\n" +
@@ -224,32 +223,32 @@ namespace PrisonStory
                                      "Press B to hide behind the Boxes\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesClosetLocked0();
-            if (choice.Equals('b')) statesBoxes();
-            if (choice.Equals('r')) statesCellOpen();
+            if (choice.Equals('c')) closetLockedGuard();
+            if (choice.Equals('b')) boxes();
+            if (choice.Equals('r')) cellHide();
         }
 
-        public static void statesClosetLocked1()
+        public static void closetLockedNoHairpin()
         {
             PrisonTitle();
             System.Console.WriteLine("The closet door is locked. You might be able to pick the lock with something.\n\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesHall0();
+            if (choice.Equals('r')) hallNoGuard();
         }
 
-        public static void statesClosetLocked2()
+        public static void closetLockedHairpin()
         {
             PrisonTitle();
             System.Console.WriteLine("The closet door is locked. You might be able to pick the lock with something.\n\n" +
                                      "Press P to pick the lock\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('p')) statesClosetOpen0();
-            if (choice.Equals('r')) statesHall2();
+            if (choice.Equals('p')) closetUnlock();
+            if (choice.Equals('r')) hallWithHairpin();
         }
 
-        public static void statesClosetOpen0()
+        public static void closetUnlock()
         {
             PrisonTitle();
             System.Console.WriteLine("You pick the lock with the hairpin. The hairpin breaks, but the closet door\n" +
@@ -257,11 +256,11 @@ namespace PrisonStory
                                      "Press S to Search the closet\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('s')) statesClosetOpen1();
-            if (choice.Equals('r')) statesHall3();
+            if (choice.Equals('s')) closetUniformOff();
+            if (choice.Equals('r')) hallClosetUnlocked();
         }
 
-        public static void statesClosetOpen1()
+        public static void closetUniformOff()
         {
             PrisonTitle();
             System.Console.WriteLine("This closet is full of maintenance equipment. A spare janitor's uniform is\n" +
@@ -269,77 +268,55 @@ namespace PrisonStory
                                      "Press I to inspect the uniform\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('i')) statesUniform();
-            if (choice.Equals('r')) statesHall3();
+            if (choice.Equals('i')) uniform();
+            if (choice.Equals('r')) hallClosetUnlocked();
         }
 
-        public static void statesClosetOpen2()
+        public static void closetUniformOn()
         {
             PrisonTitle();
             System.Console.WriteLine("This closet is full of maintenance equipment. Nothing else useful here.\n\n" +
                                      "Press C to Change out of uniform\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesClosetOpen1();
-            if (choice.Equals('r')) statesHall4();
+            if (choice.Equals('c')) closetUniformOff();
+            if (choice.Equals('r')) hallWithUniform();
         }
 
-        public static void statesOpenCloset0()
+        public static void openCloset()
         {
             PrisonTitle();
             System.Console.WriteLine("The closet door is open.\n\n" +
                                      "Press E to Enter closet\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('e')) statesClosetOpen1();
-            if (choice.Equals('r')) statesHall3();
-        }
+            if (choice.Equals('e')) closetUniformOff();
+            if (choice.Equals('r')) hallClosetUnlocked();
+        }       
 
-        public static void statesOpenCloset1()
-        {
-            PrisonTitle();
-            System.Console.WriteLine("The closet door is open.\n\n" +
-                                     "Press E to Enter closet\n" +
-                                     "Press R to Return to the hall\n\n");
-            char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('e')) statesClosetOpen2();
-            if (choice.Equals('r')) statesHall3();
-        }
-
-        public static void statesOpenCloset2()
-        {
-            PrisonTitle();
-            System.Console.WriteLine("The closet door is open.\n\n" +
-                                     "Press E to Enter closet\n" +
-                                     "Press R to Return to the hall\n\n");
-            char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('e')) statesClosetOpen2();
-            if (choice.Equals('r')) statesHall4();
-        }
-
-        public static void statesUniform()
+        public static void uniform()
         {
             PrisonTitle();
             System.Console.WriteLine("This uniform looks to be about your size.\n\n" +
                                      "Press W to Wear the uniform\n" +
                                      "Press R to Return to the closet\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('w')) statesClosetJanitor();
-            if (choice.Equals('r')) statesClosetOpen1();
+            if (choice.Equals('w')) closetJanitor();
+            if (choice.Equals('r')) closetUniformOff();
         }
 
-        public static void statesClosetJanitor()
+        public static void closetJanitor()
         {
             PrisonTitle();
             System.Console.WriteLine("You are now dressed as a janitor. This could be the perfect disguise.\n\n" +
                                      "Press C Change out of the uniform\n" +
                                      "Press R to Return to the closet\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesClosetOpen1();
-            if (choice.Equals('r')) statesClosetOpen2();
+            if (choice.Equals('c')) closetUniformOff();
+            if (choice.Equals('r')) closetUniformOn();
         }
 
-        public static void statesStairs0()
+        public static void stairsNoGuard()
         {
             PrisonTitle();
             System.Console.WriteLine("You peek up the stairs, and see 2 doors. One leading outside, and the other to\n" +
@@ -347,10 +324,10 @@ namespace PrisonStory
                                      "up with a plan.\n\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesHall0();
+            if (choice.Equals('r')) hallNoGuard();
         }
 
-        public static void statesStairs1()
+        public static void stairsWithHairpin()
         {
             PrisonTitle();
             System.Console.WriteLine("You peek up the stairs, and see 2 doors. One leading outside, and the other to\n" +
@@ -358,10 +335,10 @@ namespace PrisonStory
                                      "is just asking to get shot. Better come up with a plan.\n\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesHall2();
+            if (choice.Equals('r')) hallWithHairpin();
         }
 
-        public static void statesStairs2()
+        public static void stairsWithUniform()
         {
             PrisonTitle();
             System.Console.WriteLine("There are two doors upstairs. One leading outside, and the other to\n" +
@@ -370,20 +347,20 @@ namespace PrisonStory
                                      "Press C to enter the Courtyard\n" +
                                      "Press R to Return to the hall\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesCourtyard();
-            if (choice.Equals('r')) statesHall4();
+            if (choice.Equals('c')) courtyard();
+            if (choice.Equals('r')) hallWithUniform();
         }
 
-        public static void statesSheetsGross()
+        public static void sheetsGross()
         {
             PrisonTitle();
             System.Console.WriteLine("Ugh! You wonder why you keep looking at these. You have to get out of here!\n\n" +
                                      "Press R to Return to your cell\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCellFinal();
+            if (choice.Equals('r')) cellFinal();
         }
 
-        public static void statesHall0()
+        public static void hallNoGuard()
         {
             PrisonTitle();
             System.Console.WriteLine("You are in the hallway outside the cell. The hallway leads to stairs, and\n" +
@@ -392,23 +369,23 @@ namespace PrisonStory
                                      "Press H to check the Hall\n" +
                                      "Press S to check the Stairs\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesCloset();
-            if (choice.Equals('s')) statesStairs0();
-            if (choice.Equals('h')) statesHall1();
+            if (choice.Equals('c')) closetLockedNoHairpin();
+            if (choice.Equals('s')) stairsNoGuard();
+            if (choice.Equals('h')) hallFindPin();
         }
 
-        public static void statesHall1()
+        public static void hallFindPin()
         {
             PrisonTitle();
             System.Console.WriteLine("As you search the hallway, you come across a hairpin. This might come in handy.\n\n" +
                                      "Press T to Take the hairpin\n" +
                                      "Press R to Return to the hall\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('t')) statesHall2();
-            if (choice.Equals('r')) statesHall0();
+            if (choice.Equals('t')) hallWithHairpin();
+            if (choice.Equals('r')) hallNoGuard();
         }
 
-        public static void statesHall2()
+        public static void hallWithHairpin()
         {
             PrisonTitle();
             System.Console.WriteLine("You are in the hallway outside the cell. The hallway leads to stairs, and\n" +
@@ -416,43 +393,43 @@ namespace PrisonStory
                                      "Press C to check the Closet\n" +
                                      "Press S to check the Stairs\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesClosetLocked2();
-            if (choice.Equals('s')) statesStairs1();
+            if (choice.Equals('c')) closetLockedHairpin();
+            if (choice.Equals('s')) stairsWithHairpin();
         }
 
-        public static void statesHall3()
+        public static void hallClosetUnlocked()
         {
             PrisonTitle();
             System.Console.WriteLine("You are back in the hallway. Looks like the stairs are your way out.\n\n" +
                                      "Press C to check the Closet\n" +
                                      "Press S to check the Stairs\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesOpenCloset0();
-            if (choice.Equals('s')) statesStairs2();
+            if (choice.Equals('c')) openCloset();
+            if (choice.Equals('s')) stairsWithUniform();
         }
 
-        public static void statesHall4()
+        public static void hallWithUniform()
         {
             PrisonTitle();
             System.Console.WriteLine("You are back in the hallway. Looks like the stairs are your way out.\n\n" +
                                      "Press C to check the Closet\n" +
                                      "Press S to check the Stairs\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesOpenCloset2();
-            if (choice.Equals('s')) statesStairs2();
+            if (choice.Equals('c')) closetUniformOn();
+            if (choice.Equals('s')) stairsWithUniform();
         }
 
-        public static void statesCellFinal()
+        public static void cellFinal()
         {
             PrisonTitle();
             System.Console.WriteLine("Ok, this is it. The guard won't be back for a while, so now is your last chance.\n" +
                                      "You can almost feel the freedom.\n\n" +
                                      "Press H to go to the Hallway.\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('h')) statesHall0();
+            if (choice.Equals('h')) hallNoGuard();
         }
 
-        public static void statesCourtyard()
+        public static void courtyard()
         {
             PrisonTitle();
             System.Console.WriteLine("Nervously, you start to climb the stairs. Your hearts is pounding! As you walk\n" +
@@ -461,31 +438,21 @@ namespace PrisonStory
                                      "Press T to Talk to the guard\n" +
                                      "Press R to Run for it\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('t')) statesGuard0();
-            if (choice.Equals('r')) statesRun();
+            if (choice.Equals('t')) guard();
+            if (choice.Equals('r')) run();
         }
 
-        public static void statesGuard0()
+        public static void guard()
         {
             PrisonTitle();
             System.Console.WriteLine("The guards says \"Have a good night,\" and nods to you. You can't believe\n" +
                                      "that actually worked!\n\n" +
                                      "Press C to enter the Courtyard.\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesFreedom();
-        }
+            if (choice.Equals('c')) freedom();
+        }        
 
-        public static void statesGuard1()
-        {
-            PrisonTitle();
-            System.Console.WriteLine("The guards says \"Have a good night,\" and nods to you. You can't believe\n" +
-                                     "that actually worked." +
-                                     "Press C to enter the Courtyard.\n");
-            char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('c')) statesFreedom();
-        }
-
-        public static void statesRun()
+        public static void run()
         {
             PrisonTitle();
             System.Console.WriteLine("You panic and burst out the door as the guard chases you. The guard sounds the\n" +
@@ -498,10 +465,10 @@ namespace PrisonStory
                                      "goes black.\n\n" +
                                      "Press R to Restart\n\n");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCell();
+            if (choice.Equals('r')) cellMain();
         }
 
-        public static void statesFreedom()
+        public static void freedom()
         {
             PrisonTitle();
             System.Console.WriteLine("You wish the guard a good night, and enter the courtyard. Your heart\n" +
@@ -511,7 +478,7 @@ namespace PrisonStory
                                      "You smile as you walk off the prison grounds. You are finally free!\n\n" +
                                      "Press R to Replay");
             char choice = Console.ReadKey().KeyChar;
-            if (choice.Equals('r')) statesCell();
+            if (choice.Equals('r')) cellMain();
         }
     }
 }
